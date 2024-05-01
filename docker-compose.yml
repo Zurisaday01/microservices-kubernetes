@@ -35,7 +35,7 @@ services:
       custom:
   auction-svc:
     image: trycatchlearn/auction-svc:latest
-    build: 
+    build:
       context: .
       dockerfile: src/AuctionService/Dockerfile
     environment:
@@ -59,7 +59,7 @@ services:
       custom:
   search-svc:
     image: trycatchlearn/search-svc:latest
-    build: 
+    build:
       context: .
       dockerfile: src/SearchService/Dockerfile
     environment:
@@ -77,7 +77,7 @@ services:
       custom:
   identity-svc:
     image: trycatchlearn/identity-svc:latest
-    build: 
+    build:
       context: .
       dockerfile: src/IdentityService/Dockerfile
     environment:
@@ -93,7 +93,7 @@ services:
         ipv4_address: 10.5.0.200
   gateway-svc:
     image: trycatchlearn/gateway-svc:latest
-    build: 
+    build:
       context: .
       dockerfile: src/GatewayService/Dockerfile
     environment:
@@ -105,7 +105,7 @@ services:
       custom:
   bid-svc:
     image: trycatchlearn/bid-svc:latest
-    build: 
+    build:
       context: .
       dockerfile: src/BiddingService/Dockerfile
     environment:
@@ -124,7 +124,7 @@ services:
       custom:
   notify-svc:
     image: trycatchlearn/notify-svc:latest
-    build: 
+    build:
       context: .
       dockerfile: src/NotificationService/Dockerfile
     environment:
@@ -139,7 +139,7 @@ services:
       custom:
   web-app:
     image: trycatchlearn/web-app
-    build: 
+    build:
       context: .
       dockerfile: frontend/web-app/Dockerfile
     volumes:
