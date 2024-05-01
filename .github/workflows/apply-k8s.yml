@@ -3,7 +3,7 @@ name: apply-k8s
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: ['master']
     paths:
       - 'infra/**'
 
@@ -11,12 +11,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Install doctl
-      uses: digitalocean/action-doctl@v2
-      with:
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-    - name: Save DigitalOcean kubeconfig
-      run: doctl kubernetes cluster kubeconfig save carsties
-    - run: kubectl apply -f infra/K8S && kubectl apply -f infra/prod-k8s
-     
+      - uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+      - name: Update kubeconfig for AWS EKS
+        run: aws eks update-kubeconfig --name carsties --region us-east-2
+      - run: kubectl apply -f infra/K8S && kubectl apply -f infra/prod-k8s
